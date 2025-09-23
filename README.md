@@ -81,7 +81,7 @@ A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling
 - **Private subnets**:
   - `wordpress-subnet-private1-us-east-1a`
   - `wordpress-subnet-private2-us-east-1b`
-- **Private subnets**: `Next two times`
+- **Click**: `Next two times`
 - ✅ **Create**
 
 ---
