@@ -41,6 +41,7 @@ A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling
 
 ### 1.2 Create Security Groups (EC2, RDS, EFS, and LB)
 - Acesse o console da AWS > **EC2 > Network & Security > Security Groups > Create security groups**
+
 | **Security Group** | **Inbound (entradas)** | **Outbound (saídas)** | **Propósito / Observações** |
 |--------------------|-------------------------|------------------------|------------------------------|
 |**EC2-SG** | - SSH **22** — origem: **Seu-IP** *(Teste)* <br> - HTTP **80** — origem: **SG-ALB** <br> - NFS **2049** — origem: **EFS-SG** | - All traffic → `0.0.0.0/0` | Instâncias privadas rodando WordPress/Docker. |
