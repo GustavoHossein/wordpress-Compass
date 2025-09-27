@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Variáveis
-EFS_FILE_SYSTEM_ID="fs-03e1567765f76a7de"
-DB_HOST="wordpress-rds.ckvsyqyiw830.us-east-1.rds.amazonaws.com"
-DB_NAME="wordpress"
-DB_USER="admin"
-DB_PASSWORD="GustavoPB2025"
-PROJECT_DIR="/home/ec2-user/wordpress"
-EFS_MOUNT_DIR="/mnt/efs"
+EFS_FILE_SYSTEM_ID="seu_id_efs"
+DB_HOST="seu_endpoint_rds"
+DB_NAME="seu_nome_bd"
+DB_USER="seu_usuario_bd"
+DB_PASSWORD="sua_senha_bd"
+PROJECT_DIR="/home/ec2-user/wordpress" # Não Mudar
+EFS_MOUNT_DIR="/mnt/efs" # Não Mudar
 
 # Atualizações e instalação do Docker
 yum update -y
@@ -55,4 +55,5 @@ services:
 EOL
 
 # Inicia o container
+
 docker-compose up -d
