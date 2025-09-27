@@ -92,7 +92,7 @@ A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling
 
 - Acesse o console da AWS > **EC2 > Instances > Launch Template**
 - **Launch template name**: `wordpress-template`
-- **description**: `Template de inicializacao`
+- **Description**: `Template de inicializacao`
 - **Auto Scaling guidance**: ✅ `check`
 - **Application and OS Images (Amazon Machine Image)**:
   - **Quick Start**: `Amazon Linux`
