@@ -1,16 +1,14 @@
-# WordPress na AWS — Infraestrutura de Alta Disponibilidade
+# Arquitetura de Alta Disponibilidade para WordPress na AWS
 
-<div style="text-align:center;">
-  <img src="Images/diagrama.jpeg" alt="Diagrama da Infraestrutura" width="80%">
-</div>
+<img src="Images/diagrama.jpeg" alt="Diagrama da Infraestrutura" style="display: block; margin: 0 auto;">
 
-## 📌 Introdução
+## 📌 Introduction
 Este projeto demonstra a implantação de uma **arquitetura escalável e altamente disponível** para hospedar um site WordPress na **AWS**.  
 A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling Group (ASG)** e **Application Load Balancer (ALB)**, todos dentro de uma **VPC customizada** com sub-redes públicas e privadas.  
 
 ---
 
-## 🏗️ Visão Geral da Arquitetura
+## 🏗️ Architectural Overview
 - **VPC customizada** com 2 sub-redes públicas e 2 privadas  
 - **Internet Gateway** para saída de internet das sub-redes públicas  
 - **NAT Gateway** para permitir saída de internet das sub-redes privadas
@@ -23,7 +21,7 @@ A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling
 
 ---
 
-## ⚙️ Passos para a Criação
+## ⚙️ Steps to Creation
 
 ### 1.1 Create VPC with subnets and NAT Gateway automatically
 
@@ -90,7 +88,7 @@ A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling
 
 ---
 
-### 1.4 Create Launch Template (EC2)
+### 1.5 Create Launch Template (EC2)
 
 - Acesse o console da AWS > **EC2 > Instances > Launch Template**
 - **Launch template name**: `wordpress-template`
@@ -115,13 +113,13 @@ A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling
 #!/bin/bash
 
 # Variáveis
-EFS_FILE_SYSTEM_ID="<id_efs>"
-DB_HOST="<endpoint_rds>"
-DB_NAME="<nome_bd>"
-DB_USER="<usuario_bd>"
-DB_PASSWORD="<senha_bd>"
-PROJECT_DIR="/home/ec2-user/wordpress"
-EFS_MOUNT_DIR="/mnt/efs"
+EFS_FILE_SYSTEM_ID="seu_id_efs"
+DB_HOST="seu_endpoint_rds"
+DB_NAME="seu_nome_bd"
+DB_USER="seu_usuario_bd"
+DB_PASSWORD="sua_senha_bd"
+PROJECT_DIR="/home/ec2-user/wordpress" # Não Mudar
+EFS_MOUNT_DIR="/mnt/efs" # Não Mudar
 
 # Atualizações e instalação do Docker
 yum update -y
@@ -170,12 +168,81 @@ EOL
 
 # Inicia o container
 docker-compose up -d
+
 ```
 
+---
 
+### 1.6 Create Target Group (TG)
 
+- Acesse o console da AWS > **EC2 > Target groups > Create target group**
+- **Choose a target type**: `Instances`
+- **Target group name**: `wordpress-tg`
+- **VPC**: ✅ `wordpress-vpc`
+- ✅ **Create**
 
+---
 
+### 1.7 Create Load Balancer (LB)
+
+- Acesse o console da AWS > **EC2 > Load Balancers > Create Load Balancer**
+- **Choose**: `Application Load Balancer`
+- **Click**: `Create`
+- **Load balancer name**: ✅ `wordpress-alb`
+- **Scheme**: `Internet-facing`
+- **Network mapping**:
+  - **VPC**: `wordpress-vpc`
+  - **Availability Zones and subnets**: **sub-rede pública**
+    - `wordpress-subnet-public1-us-east-1a`
+    - `wordpress-subnet-public2-us-east-1b`
+- **Security groups**: `LB-SG`
+- **Listeners and routing**:
+  - **Protocol**: `HTTP`
+  - **Port**: `80`
+  - **Target Group**: `wordpress-tg`
+- ✅ **Create**
+
+---
+
+### 1.8 Create Auto Scalling Group (ASG)
+
+- Acesse o console da AWS > **EC2 > Auto Scalling Group > Create Auto Scalling Group**
+- **Name**: `wordpress-asg`
+- **Launch Template**: `wordpress-template`
+- **Version**: ✅ `Default(1)`
+- **VPC**: `wordpress-vpc`
+- **Subnets**: `Select 2 subnets **Privates**`
+- **Balancing option**: `Best balanced effort`
+- **Associate with load balancer**:
+  - **Select the target group**: `wordpress-tg`
+- **Health checks**:
+  - **Check**: `Enable Elastic Load Balancing health checks`
+- **Desired capacity**:
+  - **Desired**: `2`
+  - **Minimum**: `2`
+  - **Maximum**: `4`
+- **Monitoring (CloudWatch)**:
+  - **Check**: `Enable metric collection in CloudWatch`
+- ✅ **Create**
+
+---
+
+### 💡 Design Tests
+During this phase, tests were conducted to verify the full functionality of the WordPress application deployed on the AWS infrastructure. The results confirmed that all components are properly integrated and operating as expected.
+
+- 1️⃣ The application was successfully accessed via a browser, using the Application Load Balancer's public DNS to load the WordPress installer.
+  
+<img src="Images/" alt="Imagem navegador" style="display: block; margin: 0 auto;">
+
+- 2️⃣ Alterarrrrrrrrrrrrrrrrrr
+  
+<img src="Images/" alt="Web post" style="display: block; margin: 0 auto;">
+
+---
+
+### 📋 Project completion
+
+The implementation of this infrastructure on AWS successfully demonstrated the creation of a production environment for WordPress, meeting the requirements for high availability, security, and scalability. The proposed architecture was operationally validated through successful access to the WordPress installer via an Application Load Balancer, confirming the correct configuration of all interconnected components.
 
 
 
