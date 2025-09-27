@@ -1,5 +1,9 @@
 # WordPress na AWS — Infraestrutura de Alta Disponibilidade
 
+<div style="text-align:center;">
+  <img src="Images/diagrama.jpeg" alt="Diagrama da Infraestrutura" width="80%">
+</div>
+
 ## 📌 Introdução
 Este projeto demonstra a implantação de uma **arquitetura escalável e altamente disponível** para hospedar um site WordPress na **AWS**.  
 A infraestrutura utiliza recursos gerenciados como **EC2, RDS, EFS, Auto Scaling Group (ASG)** e **Application Load Balancer (ALB)**, todos dentro de uma **VPC customizada** com sub-redes públicas e privadas.  
