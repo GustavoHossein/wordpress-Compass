@@ -1,6 +1,8 @@
 # Arquitetura de Alta Disponibilidade para WordPress na AWS
 
-<img src="Images/diagrama.jpeg" alt="Diagrama da Infraestrutura" style="display: block; margin: 0 auto;">
+<p align="center">
+  <img src="Images/diagrama.jpeg" alt="Diagrama da Infraestrutura">
+</p>
 
 ## 📌 Introduction
 Este projeto demonstra a implantação de uma **arquitetura escalável e altamente disponível** para hospedar um site WordPress na **AWS**.  
