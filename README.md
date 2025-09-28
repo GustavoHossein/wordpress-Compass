@@ -232,11 +232,19 @@ During this phase, tests were conducted to verify the full functionality of the 
 
 - 1️⃣ The application was successfully accessed via a browser, using the Application Load Balancer's public DNS to load the WordPress installer.
   
-<img src="Images/" alt="Imagem navegador" style="display: block; margin: 0 auto;">
+<img src="Images/1.1-Instalacao-wordpress.jpeg" alt="Imagem navegador" style="display: block; margin: 0 auto;">
 
-- 2️⃣ Alterarrrrrrrrrrrrrrrrrr
+- 2️⃣ Creating an account
   
-<img src="Images/" alt="Web post" style="display: block; margin: 0 auto;">
+<img src="Images/1.2-Criando-conta.jpeg" alt="Web post" style="display: block; margin: 0 auto;">
+
+- 3️⃣ Creating a post
+  
+<img src="Images/1.3-Post.jpeg" alt="Web post" style="display: block; margin: 0 auto;">
+
+- 4️⃣ Once published, the post could be accessed through a separate public link used for viewing
+  
+<img src="Images/1.4-Post-criado.jpeg" alt="Web post" style="display: block; margin: 0 auto;">
 
 ---
 
